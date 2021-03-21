@@ -1,0 +1,4 @@
+var hidden={
+  tables:{},
+  elements:{}
+};
