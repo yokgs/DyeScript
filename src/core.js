@@ -1,0 +1,3 @@
+if(bluedye){
+  var blue={};
+}
