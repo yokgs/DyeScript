@@ -1,3 +1,9 @@
 if(bluedye){
-  var blue={};
+  var blue={
+    compile:(dye,args)=>{
+      var raw=dye.split('\n');
+      return dye;
+    }
+  };
+  bluedye.add(blue);
 }
