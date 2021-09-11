@@ -1,20 +1,25 @@
-# BlueDye-Sheets
-BlueDye-Sheets is a powerful tool that allows you to compile your files `.dye` into `.css` and much more.
+# DyeSript 
+DyeScript is a powerful tool that allows you to compile your files `.dye` into `.css` and much more.
 ## Usage
-#### compile a string as bluedye sheet
+#### compile a string as DyeScript
 ```javascript
-bluedye.sheet.compile("[[dye script]]");
+dye.compile(myScript);
 ```
 #### import `.dye`
 ```javascript
-bluedye.sheet.import("[[url]]/[[filename]].dye");
+dye.import("[[url]]/[[filename]].dye");
 ```
 #### set values
 ```javascript
-bluedye.sheet.set("[[name]]","[[value]]");
+dye.set(name,value);
 ```
 
 #### get values
 ```javascript
-bluedye.sheet.get("[[name]]");
+dye.get(name);
+```
+
+#### generate css
+```javascript
+dye.export(...file_names);
 ```
