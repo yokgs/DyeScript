@@ -21,5 +21,5 @@ dye.get(name);
 
 #### generate css
 ```javascript
-dye.export(...file_names);
+dye.export(files,url);
 ```
