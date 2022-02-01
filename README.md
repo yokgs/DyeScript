@@ -9,14 +9,29 @@ dye.compile(myScript);
 ```javascript
 dye.import("[[path]]/[[filename]].dye");
 ```
+
+#### define directories 
+```js
+dye.dir(...directories);
+```
+
+#### activate directory for read/write 
+```js
+dye.open(directory);
+```
+#### open read-only directories
+```js
+dye.read(...directories);
+```
+
 #### set values
 ```javascript
-dye.set(name,value);
+dye.set(name,value); // saved on the current directory
 ```
 
 #### get values
 ```javascript
-dye.get(name);
+dye.get(name); // get the value from current directory or other read-only directories if value is missing
 ```
 
 #### generate css
