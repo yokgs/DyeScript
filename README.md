@@ -5,7 +5,7 @@ DyeScript is a powerful tool that allows you to compile your files `.dye` into `
 ```javascript
 dye.compile(myScript);
 ```
-#### import `.dye`
+#### import `.dye` file
 ```javascript
 dye.import("[[path]]/[[filename]].dye");
 ```
