@@ -7,7 +7,7 @@ dye.compile(myScript);
 ```
 #### import `.dye`
 ```javascript
-dye.import("[[url]]/[[filename]].dye");
+dye.import("[[path]]/[[filename]].dye");
 ```
 #### set values
 ```javascript
@@ -21,5 +21,5 @@ dye.get(name);
 
 #### generate css
 ```javascript
-dye.export(files,url);
+dye.export(files,path);
 ```
