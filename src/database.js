@@ -1,4 +1,0 @@
-var hidden={
-  tables:{},
-  elements:{}
-};
