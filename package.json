@@ -1,0 +1,31 @@
+{
+  "name": "@yokgs/dyescript",
+  "version": "0.0.1",
+  "description": "Powerful \"dye to css\" compiler ",
+  "main": "./dist/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yokgs/DyeScript.git"
+  },
+  "keywords": [
+    "css",
+    "bluedye",
+    "preprocessor",
+    "dyescript"
+  ],
+  "author": "Yazid Slila (@yokgs)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yokgs/DyeScript/issues"
+  },
+  "homepage": "https://github.com/yokgs/DyeScript#readme",
+  "dependencies": {
+    "@yokgs/bluedyejs": "^2.1.2"
+  }
+}
