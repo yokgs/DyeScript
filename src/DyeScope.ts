@@ -1,15 +1,15 @@
-export class DyeStore {
+export class DyeScope {
   protected classes: any = {}; // styles
   public tokens: any = {}; // variables
   protected links: any = {}; // style's target
-  protected stack: DyeStore[] = [];
+  protected stack: DyeScope[] = [];
   protected finals: string[] = [];
 
-  $extends(store: DyeStore) {
+  $extends(store: DyeScope) {
     this.stack.push(store);
   }
 
-  $global(stores: DyeStore[]) {
+  $global(stores: DyeScope[]) {
     this.stack = [...stores];
   }
 
