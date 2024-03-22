@@ -10,7 +10,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node ./test/index.js"
+    "test": "node ./test/index.js",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -31,5 +32,8 @@
   "dependencies": {
     "@yokgs/bluedyejs": "^2.1.2",
     "yargs": "^17.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30"
   }
 }
