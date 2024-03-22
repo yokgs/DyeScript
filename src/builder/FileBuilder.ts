@@ -3,7 +3,7 @@ import { Store } from "../store/store";
 export abstract class FileBuilder {
     protected _buffer: string = '';
     protected header: string = '-- DyeScript Default Header --';
-    
+
     abstract build(store: Store): string;
 
     protected initBuffer(): void {
@@ -18,14 +18,16 @@ export abstract class FileBuilder {
         this._buffer = this._buffer.concat(buffer);
     }
 
-    protected cleanStyles($: Array<[string, number]>): string {
-        let max = 0, mi = 0;
-        $.forEach((x, i) => {
-            if (x[1] > max) {
-                max = x[1];
-                mi = i;
+    protected getDominantStyle(valuesOfProperty: Array<[string, number]>): string {
+        let dominantScore = 0, dominantStyleIndex = 0;
+        valuesOfProperty.forEach((weightedValue, index) => {
+            let [value, score] = weightedValue;
+            if (score > dominantScore) {
+                dominantScore = score;
+                dominantStyleIndex = index;
             }
         });
-        return $[mi][0];
+        let [value, score] = valuesOfProperty[dominantStyleIndex];
+        return value;
     }
 }

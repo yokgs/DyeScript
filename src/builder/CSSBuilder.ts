@@ -10,7 +10,7 @@ export class CSSBuilder extends FileBuilder {
     protected header: string = `/**
     * Built with DyeScript v${DyeRuntime.version}
     * by Yazid Slila (@yokgs)
-    */`
+    */`;
 
     constructor() {
         super();
@@ -81,7 +81,7 @@ export class CSSBuilder extends FileBuilder {
             this.append(`\n\n${el} {\n`);
             let style = styles.get(el);
             for (let p in style) {
-                this.append(`\t${p}: ${this.cleanStyles(style[p])};\n`);
+                this.append(`\t${p}: ${this.getDominantStyle(style[p])};\n`);
             }
             this.append(`}`);
         }
