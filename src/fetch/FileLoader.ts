@@ -2,6 +2,16 @@ import fs from 'fs';
 import path from 'path';
 
 export class FileLoader {
+    private static instance: FileLoader | null = null;
+
+    private constructor() { }
+
+    public static getInstance(): FileLoader {
+        if (!FileLoader.instance) {
+            FileLoader.instance = new FileLoader();
+        }
+        return FileLoader.instance;
+    }
 
     public load(entityPath: string) {
         const fixedPath = this.fixExtension(entityPath);
@@ -15,6 +25,7 @@ export class FileLoader {
             return this.readFile(path.join(fixedPath, 'index.dye'));
         if (fs.existsSync(path.join(fixedPath, 'index.dyex')))
             return this.readFile(path.join(fixedPath, 'index.dyex'));
+        return "";
     }
 
     private fixExtension(pathLike: string) {
