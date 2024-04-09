@@ -1,6 +1,7 @@
 import { Store } from "../store/store";
 import { FileLoader } from "../fetch/FileLoader";
 import { Parser } from "../parser/Parser";
+import { DyeInterpreter } from "../../interpreter/DyeInterpreter";
 
 export class DyeRuntime {
     static readonly version = 'pre-1.0.0';
@@ -30,7 +31,8 @@ export class DyeRuntime {
 
     private initilize() {
         let table = new Parser().parse(this.source);
-
+        let interpreter = new DyeInterpreter(this.store);
+        interpreter.process(table);
     }
 
 }
