@@ -1,21 +1,21 @@
 import { Store } from "./store";
 
 export class DyeCache {
-    static dyescripts: Map<string, Store> = new Map();
-    
+    private static scripts: Map<string, Store> = new Map();
+
     public static cache(store: Store, name: string) {
-        this.dyescripts.set(name, store);
+        this.scripts.set(name, store);
     }
 
     public static cached(name: string) {
-        return this.dyescripts.has(name);
+        return this.scripts.has(name);
     }
 
     public static getCached(name: string) {
-        return this.dyescripts.get(name);
+        return this.scripts.get(name);
     }
 
     public static clear() {
-        this.dyescripts.clear();
+        this.scripts.clear();
     }
 }

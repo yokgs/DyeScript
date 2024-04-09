@@ -4,7 +4,7 @@ import { DyeCache } from '../store/cache';
 import { load } from '../core/loader';
 
 
-export function watcher($path: string, output: string, target: string, debug) {
+export function watcher($path: string, output: string, target: string, debug: boolean = false) {
     let _path = $path;
     let options = { path: process.cwd(), debug } as IOptions;
     $path = checkModule($path, options);

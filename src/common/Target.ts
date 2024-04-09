@@ -8,4 +8,4 @@ const DyeTarget = {
 
 } as const;
 
-export type DyeTarget = keyof typeof DyeTarget;
+export type DyeCompilerTarget = keyof typeof DyeTarget;

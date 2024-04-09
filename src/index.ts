@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import yargs from 'yargs';
-import { DyeTarget } from './common/Target';
+import { DyeCompilerTarget } from './common/Target';
 
 const { watcher } = require('./lib/Fetch/watch');
 const { load } = require('./lib/init');
@@ -32,7 +32,7 @@ const options = yargs
 const { path, output, target, watch, debug } = options;
 
 if (watch) {
-    watcher(path, output, target as DyeTarget, debug);
+    watcher(path, output, target as DyeCompilerTarget, debug);
 }
 
-load(path, output, target as DyeTarget, debug);
+load(path, output, target as DyeCompilerTarget, debug);
