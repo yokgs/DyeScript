@@ -10,6 +10,13 @@ export class Store {
     public cachable: boolean = true;
     private counter = 0;
 
+    addStyle(selector: string, property: string, value: string) {
+        let style = this.styles.get(selector) || {};
+        if (!(property in style)) style[property] = [];
+        style[property].push([value, this.counter++]);
+        this.styles.set(selector, style);
+    }
+
     extendFrom(store: Store): void {
         for (let key of store.styles.keys()) {
             if (!this.styles.has(key)) this.styles.set(key, {} as IStyle);
