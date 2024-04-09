@@ -1,18 +1,22 @@
-import { variable } from "@tensorflow/tfjs-node";
+import { DyeScope } from "../src/data/DyeScope";
+import { DyeScopeWrapper } from "../src/data/DyeScopeWrapper";
 import { Store } from "../src/store/store";
 
 export class DyeInterpreter {
 
-    private static readonly variable = /&[a-zA-Z]{1}[\w]+/g;
+    private readonly variable = /&[a-zA-Z][\w]+/g;
 
     private store: Store;
+    private scope: DyeScopeWrapper;
 
-    constructor(store: Store) {
+    constructor(store: Store, scope: DyeScope) {
         this.store = store;
+        this.scope = new DyeScopeWrapper(scope);
     }
 
     public evaluate(statment: string) {
-
+        if (this.variable.test(statment))
+            return this.scope.get(statment);
     }
 
     public interpret(statment: string[]) {

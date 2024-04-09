@@ -27,7 +27,7 @@ export abstract class FileBuilder {
                 dominantStyleIndex = index;
             }
         });
-        let [value, score] = valuesOfProperty[dominantStyleIndex];
+        let [value] = valuesOfProperty[dominantStyleIndex];
         return value;
     }
 }

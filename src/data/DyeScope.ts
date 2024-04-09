@@ -22,7 +22,7 @@ export class DyeScope {
   }
 
   get(key: string) {
-
+    return this.tokens[key];
   }
 
   set(key: string, value: any) {

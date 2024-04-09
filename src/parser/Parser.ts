@@ -4,7 +4,7 @@ export class Parser {
     static readonly LEFT_ANCHOR = "<";
     static readonly TEMPLATE_ANCHOR = /\{\*\}/g;
     static readonly UP_TEMPLATE_ANCHOR = /\{\^\}/g;
-    static readonly LEFT_TEMPLATE_ANCHOR = /\{\<\}/g;
+    static readonly LEFT_TEMPLATE_ANCHOR = /\{<\}/g;
 
 
     private replaceAnchors(commands: string[][]): string[][] {

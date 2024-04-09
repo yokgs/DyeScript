@@ -5,4 +5,7 @@ export class DyeScopeWrapper {
     constructor(scope: DyeScope) {
         this.scope = scope;
     }
+    public get(variable: string): any {
+        return this.scope.get(variable);
+    }
 }
