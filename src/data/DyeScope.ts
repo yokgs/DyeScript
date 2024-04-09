@@ -5,38 +5,37 @@ export class DyeScope {
   protected stack: DyeScope[] = [];
   protected finals: string[] = [];
 
-  $extends(store: DyeScope) {
+  extends(store: DyeScope) {
     this.stack.push(store);
   }
 
-  $global(stores: DyeScope[]) {
+  global(stores: DyeScope[]) {
     this.stack = [...stores];
   }
 
-
-  $hasLocal(key: string): boolean {
+  hasLocal(key: string): boolean {
     return this.tokens.hasOwnProperty(key);
   }
 
-  $isFinal(key: string): boolean {
+  isFinal(key: string): boolean {
     return this.finals.includes(key);
   }
 
-  $get(key: string) {
+  get(key: string) {
 
   }
 
-  $set(key: string, value: any) {
-    if (!this.$isFinal(key)) {
+  set(key: string, value: any) {
+    if (!this.isFinal(key)) {
       this.tokens[key] = value;
     }
   }
 
-  $put(key: string, value: any) {
+  put(key: string, value: any) {
 
   }
 
-  $pop(key: string) {
+  pop(key: string) {
 
   }
 
