@@ -11,7 +11,7 @@ export abstract class FileBuilder {
     }
 
     protected getOutput(): string {
-        return this._buffer;
+        return this._buffer.trim();
     }
 
     protected append(buffer: string): void {
