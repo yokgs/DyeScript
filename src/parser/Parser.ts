@@ -48,7 +48,13 @@ export class Parser {
     }
 
     public parse(source: string): string[][] {
-        let table = source.split(/[\r*\n]+/).map(x => x.split(/\s+/));
+
+        let removedInline = source.replace(/;/g, '\n');
+        let removedMultipleLines = removedInline.split(/[\r*\n]+/);
+
+        let joinCommas = removedMultipleLines.map(x => x.replace(/[\s]*,[\s]*/g, ','));
+
+        let table = joinCommas.map(x => x.split(/\s+/));
         return this.replaceAnchors(table);
     }
 
