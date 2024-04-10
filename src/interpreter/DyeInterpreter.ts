@@ -36,11 +36,11 @@ export class DyeInterpreter {
     }
 
     private defineStyle(statment: string[]) {
-        let selector = statment[0];
+        let selectors = statment[0].split(",");
         for (let i = 1; i < statment.length; i += 2) {
             let property = statment[i];
             let value = statment[i + 1];
-            this.store.addStyle(selector, property, value);
+            this.store.addStyle(selectors, property, value);
         }
     }
 
