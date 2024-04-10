@@ -1,13 +1,16 @@
 import { Store } from "../store/store";
 import { FileLoader } from "../fetch/FileLoader";
 import { Parser } from "../parser/Parser";
-import { DyeInterpreter } from "../../interpreter/DyeInterpreter";
+import { DyeInterpreter } from "../interpreter/DyeInterpreter";
+import { DyeScope } from "../data/DyeScope";
 
 export class DyeRuntime {
     static readonly version = 'pre-1.0.0';
     private store: Store;
     private createdBy: string = 'api';
     private source: string;
+    private mainScope = new DyeScope();
+    private static readonly globalScope = new DyeScope();
 
     constructor(source: string) {
         this.store = new Store();
@@ -31,7 +34,7 @@ export class DyeRuntime {
 
     private initilize() {
         let table = new Parser().parse(this.source);
-        let interpreter = new DyeInterpreter(this.store);
+        let interpreter = new DyeInterpreter(this.store, this.mainScope);
         interpreter.process(table);
     }
 
