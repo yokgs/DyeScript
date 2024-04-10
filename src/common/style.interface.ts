@@ -1,3 +1,5 @@
 export interface IStyle {
-    [key: string]: Array<[string, number]>;
+    [key: string]: Array<WeightedValue>;
 }
+
+export type WeightedValue = [string, number];
