@@ -1,6 +1,6 @@
-import { DyeScope } from "../src/data/DyeScope";
-import { DyeScopeWrapper } from "../src/data/DyeScopeWrapper";
-import { Store } from "../src/store/store";
+import { DyeScope } from "../data/DyeScope";
+import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
+import { Store } from "../store/store";
 
 export class DyeInterpreter {
 
