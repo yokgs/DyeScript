@@ -1,6 +1,7 @@
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
-import { IStyle } from "../common/style.interface";
+import { IStyle, WeightedValue } from "../common/style.interface";
+import { StyleManager } from "./StyleManager";
 
 export class Store {
     public styles: Map<string, IStyle> = new Map<string, IStyle>;
@@ -10,16 +11,18 @@ export class Store {
     public cachable: boolean = true;
     private counter = 0;
 
-    addStyle(selector: string, property: string, value: string) {
-        let style = this.styles.get(selector) || {};
-        if (!(property in style)) style[property] = [];
-        style[property].push([value, this.counter++]);
-        this.styles.set(selector, style);
+    addStyle(selectors: string[], property: string, value: string) {
+        let weightedValue = [value, this.counter] as WeightedValue;
+        let manager = new StyleManager(this.styles);
+        for (let selector of selectors) {
+            manager.addStyle(selector, property, weightedValue);
+        }
+        this.tick();
     }
 
     extendFrom(store: Store): void {
         for (let key of store.styles.keys()) {
-            if (!this.styles.has(key)) this.styles.set(key, {} as IStyle);
+            if (!this.styles.has(key)) this.styles.set(key, {});
             this.mergeStyles(this.styles.get(key) || {}, store.styles.get(key) || {});
         }
     }
@@ -27,7 +30,7 @@ export class Store {
     private mergeStyles(to: IStyle, from: IStyle): void {
         for (let key in from) {
             let fromProperty = from[key];
-            let calibratedProperty = fromProperty.map(([value, score]) => [value, score + this.counter]) as [string, number][];
+            let calibratedProperty = fromProperty.map(([value, score]) => [value, score + this.counter]) as WeightedValue[];
             if (key in to)
                 to[key].push(...calibratedProperty);
             else
