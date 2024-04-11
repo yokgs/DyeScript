@@ -52,7 +52,7 @@ export class Parser {
         let removedInline = source.replace(/;/g, '\n');
         let removedMultipleLines = removedInline.split(/[\r*\n]+/);
 
-        let joinCommas = removedMultipleLines.map(x => x.replace(/[\s]{1,4},/g, ',').replace(/,[\s]{1,4}/g, ','));
+        let joinCommas = removedMultipleLines.map(x => x.replace(/\s{1,4},/g, ',').replace(/,\s{1,4}/g, ','));
 
         let table = joinCommas.map(x => x.split(/\s+/));
         return this.replaceAnchors(table);

@@ -5,7 +5,7 @@ import { Store } from "../store/store";
 
 export class DyeInterpreter {
 
-    private readonly variable = /&[a-zA-Z][\w]+/g;
+    private readonly variable = /&[a-zA-Z]\w+/g;
 
     private store: Store;
     private scope: DyeScopeWrapper;
