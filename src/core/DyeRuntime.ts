@@ -15,6 +15,7 @@ export class DyeRuntime {
     constructor(source: string) {
         this.store = new Store();
         this.source = source;
+        this.initilize();
     }
 
     static createFromFile(filePath: string): DyeRuntime {
@@ -36,6 +37,10 @@ export class DyeRuntime {
         let table = new Parser().parse(this.source);
         let interpreter = new DyeInterpreter(this.store, this.mainScope);
         interpreter.process(table);
+    }
+
+    public getStore(): Store {
+        return this.store;
     }
 
 }
