@@ -1,3 +1,4 @@
+import { TextCaseConverter } from "../common/TextCaseConverter";
 import { DyeScope } from "../data/DyeScope";
 import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
 import { Store } from "../store/store";
@@ -38,7 +39,7 @@ export class DyeInterpreter {
     private defineStyle(statment: string[]) {
         let selectors = statment[0].split(",");
         for (let i = 1; i < statment.length; i += 2) {
-            let property = statment[i];
+            let property = TextCaseConverter.toCamelCase(statment[i]);
             let value = statment[i + 1];
             this.store.addStyle(selectors, property, value);
         }
