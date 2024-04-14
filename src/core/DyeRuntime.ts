@@ -27,7 +27,7 @@ export class DyeRuntime {
         return new DyeRuntime(content);
     }
 
-    public restartFromSource(): DyeRuntime {
+    public restartFromSource(): this {
         this.store = new Store();
         this.initilize();
         return this;
