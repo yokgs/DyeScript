@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/yokgs/DyeScript#readme",
   "dependencies": {
-    "@yokgs/bluedyejs": "^2.1.2",
-    "yargs": "^17.7.1"
+    "@yokgs/bluedyejs": "^2.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.11.30",
+    "mocha": "^10.4.0"
   }
 }

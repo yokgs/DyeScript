@@ -1,5 +1,8 @@
 {
-   "entry": "jjj",
+   "entry": "./dyes",
    "experimental": true,
-   "log": "./u"
+   "log": "./dyes/logs",
+   "outputDir": "./dyes-gen",
+   "targets": ["CSS", "MinCSS", "DyeSwift"],
+   "strict": true
 }
