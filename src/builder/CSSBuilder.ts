@@ -8,7 +8,7 @@ import { FileBuilder } from "./FileBuilder";
 export class CSSBuilder extends FileBuilder {
 
     protected header: string = `/**
-    * Built with DyeScript v${DyeRuntime.version}
+    * Built with DyeScript version ${DyeRuntime.version}
     * by Yazid Slila (@yokgs)
     */`;
 
@@ -16,7 +16,7 @@ export class CSSBuilder extends FileBuilder {
         super();
     }
 
-    build(store: Store): string {
+    public build(store: Store): string {
 
         this.initBuffer();
 
@@ -31,14 +31,13 @@ export class CSSBuilder extends FileBuilder {
         this.processStyles(styles);
         this.processAnimations(animations);
         this.processMotions(motions);
-
         return this.getOutput();
     }
 
-    processMotions(motions: Map<string, IAnimation>): void {
+    protected processMotions(motions: Map<string, IAnimation>): void {
 
         let motionBuffer = '';
-        for (let motionKey in motions) {
+        for (let motionKey in motions.keys()) {
 
             motionBuffer += `\n\t@keyframes ${motionKey} {\n`;
             let motion = motions.get(motionKey);
@@ -58,8 +57,8 @@ export class CSSBuilder extends FileBuilder {
         }
     }
 
-    processAnimations(animations: Map<string, IAnimation>): void {
-        for (let animationKey in animations) {
+    protected processAnimations(animations: Map<string, IAnimation>): void {
+        for (let animationKey in animations.keys()) {
             this.append(`\n\n@keyframes ${animationKey} {\n`);
             for (let keyframe in animations.get(animationKey)) {
 
@@ -76,8 +75,8 @@ export class CSSBuilder extends FileBuilder {
         }
     }
 
-    processStyles(styles: Map<string, IStyle>) {
-        for (let el in styles) {
+    protected processStyles(styles: Map<string, IStyle>) {
+        for (let el of styles.keys()) {
             this.append(`\n\n${el} {\n`);
             let style = styles.get(el);
             for (let p in style) {
@@ -88,7 +87,7 @@ export class CSSBuilder extends FileBuilder {
     }
 
     processFonts(fonts: Map<string, IFont>) {
-        for (let el in fonts) {
+        for (let el in fonts.keys()) {
             let font = fonts.get(el);
             if (font)
                 this.append(`\n@font-face {\n\tfont-family: ${el};\n\tsrc: url(${font.source});\n}`);
