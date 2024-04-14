@@ -31,16 +31,4 @@ export class DyeScope {
     }
   }
 
-  put(key: string, value: any) {
-
-  }
-
-  pop(key: string) {
-
-  }
-
-
-
-
-
 };
