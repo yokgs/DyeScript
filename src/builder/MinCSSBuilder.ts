@@ -1,34 +1,12 @@
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
 import { IStyle } from "../common/style.interface";
-import { DyeRuntime } from "../core/DyeRuntime";
-import { Store } from "../store/store";
 import { CSSBuilder } from "./CSSBuilder";
 
 export class MinCSSBuilder extends CSSBuilder {
 
-    protected header: string = `/**\n * Built with DyeScript version ${DyeRuntime.version}\n * by Yazid Slila (@yokgs)\n*/\n`;
-
     constructor() {
         super();
-    }
-
-    public build(store: Store): string {
-
-        this.initBuffer();
-
-        let {
-            styles,
-            fonts,
-            animations,
-            motions
-        } = store;
-
-        this.processFonts(fonts);
-        this.processStyles(styles);
-        this.processAnimations(animations);
-        this.processMotions(motions);
-        return this.getOutput();
     }
 
     protected processMotions(motions: Map<string, IAnimation>): void {
