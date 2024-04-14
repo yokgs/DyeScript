@@ -49,8 +49,8 @@ export class Parser {
 
     public parse(source: string): string[][] {
 
-        let removedInline = source.replace(/;/g, '\n');
-        let removedMultipleLines = removedInline.split(/[\r*\n]+/);
+        let removedInline = source.replace(/;/g, '\n').replace(/\r\n/g, '\n');
+        let removedMultipleLines = removedInline.split(/\n+/);
 
         let joinCommas = removedMultipleLines.map(x => x.replace(/\s{1,4},/g, ',').replace(/,\s{1,4}/g, ','));
 
