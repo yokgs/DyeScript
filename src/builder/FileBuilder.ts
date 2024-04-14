@@ -21,7 +21,7 @@ export abstract class FileBuilder {
     protected getDominantStyle(valuesOfProperty: Array<[string, number]>): string {
         let dominantScore = 0, dominantStyleIndex = 0;
         valuesOfProperty.forEach((weightedValue, index) => {
-            let [value, score] = weightedValue;
+            let score = weightedValue[1];
             if (score > dominantScore) {
                 dominantScore = score;
                 dominantStyleIndex = index;
