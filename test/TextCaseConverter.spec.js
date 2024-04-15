@@ -1,4 +1,4 @@
-const { TextCaseConverter } = require('../../dist/common/TextCaseConverter');
+const { TextCaseConverter } = require('../dist/common/TextCaseConverter');
 const assert = require("assert");
 
 describe('TextCaseConverter', () => {
