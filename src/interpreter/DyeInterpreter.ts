@@ -2,10 +2,11 @@ import { TextCaseConverter } from "../common/TextCaseConverter";
 import { DyeScope } from "../data/DyeScope";
 import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
 import { Store } from "../store/store";
+import { VariableNameValidator } from "../validator/VariableNameValidator";
 
 export class DyeInterpreter {
 
-    private readonly variable = /&[a-zA-Z]\w+/g;
+    private readonly variable = /&[a-zA-Z]\w+/;
 
     private store: Store;
     private scope: DyeScopeWrapper;
@@ -17,22 +18,33 @@ export class DyeInterpreter {
 
     public evaluate(statment: string) {
         if (this.variable.test(statment))
-            return this.scope.get(statment);
+            return this.scope.get(statment.slice(1));
+        return statment;
     }
 
     public interpret(statment: string[]) {
-        let query = statment[0];
-        statment = statment.slice(1);
+        let [query, ...queue] = statment.map(s => this.evaluate(s));
         switch (query) {
             case '@':
-                this.defineVariables(statment)
+                this.defineVariables(queue);
+                break;
+            case '!@':
+                this.defineDefaultVariables(queue);
                 break;
             case '#':
-                this.defineCollection(statment);
+                this.defineCollection(queue);
                 break;
             case '$':
-                this.defineStyle(statment);
+                this.defineStyle(queue);
                 break;
+        }
+    }
+
+    private defineDefaultVariables(statment: string[]) {
+        for (let i = 0; i < statment.length; i += 2) {
+            let name = statment[i];
+            let value = statment[i + 1];
+            this.scope.setDefault(name, value);
         }
     }
 
@@ -46,7 +58,14 @@ export class DyeInterpreter {
     }
 
     private defineVariables(statment: string[]) {
-        throw new Error("Method not implemented.");
+        for (let i = 0; i < statment.length; i += 2) {
+
+            let name = statment[i];
+            VariableNameValidator.isValid(name);
+
+            let value = statment[i + 1];
+            this.scope.set(name, value);
+        }
     }
 
     private defineCollection(statment: string[]) {
