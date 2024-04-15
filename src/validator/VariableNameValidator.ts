@@ -1,8 +1,10 @@
-export class VariableNameValidator {
-    static test = /^[a-zA-Z][a-zA-Z0-9/]*$/
-    static strict = false;
-    public static isValid(variableName: string): void {
-        if (!this.test.test(variableName) && this.strict) {
+import { Validator } from "./Validator";
+
+export class VariableNameValidator extends Validator {
+    protected static test = /^[a-zA-Z][a-zA-Z0-9/]*$/
+    protected static strict = false;
+    public isValid(variableName: string): void {
+        if (!VariableNameValidator.test.test(variableName) && VariableNameValidator.strict) {
             throw new Error(`Invalid variable name: ${variableName}`);
         }
     }

@@ -61,7 +61,7 @@ export class DyeInterpreter {
         for (let i = 0; i < statment.length; i += 2) {
 
             let name = statment[i];
-            VariableNameValidator.isValid(name);
+            new VariableNameValidator().isValid(name);
 
             let value = statment[i + 1];
             this.scope.set(name, value);
