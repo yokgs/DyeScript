@@ -9,7 +9,6 @@ export class DyeRuntime {
     private store: Store;
     private createdBy: string = 'api';
     private source: string;
-    private mainScope = new DyeScope();
     private static readonly globalScope = new DyeScope();
 
     constructor(source: string) {
@@ -35,7 +34,7 @@ export class DyeRuntime {
 
     private initilize() {
         let table = new Parser().parse(this.source);
-        let interpreter = new DyeInterpreter(this.store, this.mainScope);
+        let interpreter = new DyeInterpreter(this.store);
         interpreter.process(table);
     }
 
