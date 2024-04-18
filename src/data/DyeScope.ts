@@ -1,9 +1,15 @@
 export class DyeScope {
+
+  public name: string;
   protected classes: any = {}; // styles
   public tokens: any = {}; // variables
   protected links: any = {}; // style's target
   protected stack: DyeScope[] = [];
   protected finals: string[] = [];
+
+  constructor(name: string = 'a scope') {
+    this.name = name;
+  }
 
   extends(store: DyeScope) {
     this.stack.push(store);
@@ -13,19 +19,19 @@ export class DyeScope {
     this.stack = [...stores];
   }
 
-  hasLocal(key: string): boolean {
-    return this.tokens.hasOwnProperty(key);
+  public hasLocal(key: string): boolean {
+    return this.tokens.hasOwnProperty(key) || key in this.tokens;
   }
 
-  isFinal(key: string): boolean {
+  private isFinal(key: string): boolean {
     return this.finals.includes(key);
   }
 
-  get(key: string) {
+  public get(key: string) {
     return this.tokens[key];
   }
 
-  set(key: string, value: any) {
+  public set(key: string, value: any) {
     if (!this.isFinal(key)) {
       this.tokens[key] = value;
     }
