@@ -1,6 +1,8 @@
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
 import { IStyle, WeightedValue } from "../common/style.interface";
+import { DyeScope } from "../data/DyeScope";
+import { ScopeManager } from "./ScopeManager";
 import { StyleManager } from "./StyleManager";
 
 export class Store {
@@ -8,8 +10,16 @@ export class Store {
     public fonts: Map<string, IFont> = new Map<string, IFont>();
     public animations: Map<string, IAnimation> = new Map<string, IAnimation>();
     public motions: Map<string, IAnimation> = new Map<string, IAnimation>();
+
+    public scopeManager = new ScopeManager();
+
     public cachable: boolean = true;
     private counter = 0;
+
+    activateCollection(collection: string): DyeScope {
+        this.scopeManager.setActiveScope(collection);
+        return this.scopeManager.getActiveScope();
+    }
 
     addStyle(selectors: string[], property: string, value: string) {
         let weightedValue = [value, this.counter] as WeightedValue;
