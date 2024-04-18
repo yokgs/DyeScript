@@ -6,14 +6,14 @@ import { VariableNameValidator } from "../validator/VariableNameValidator";
 
 export class DyeInterpreter {
 
-    private readonly variable = /&[a-zA-Z]\w+/;
+    private readonly variable = /&[a-zA-Z][a-zA-Z0-9/]*/;
 
     private store: Store;
     private scope: DyeScopeWrapper;
 
-    constructor(store: Store, scope: DyeScope) {
+    constructor(store: Store) {
         this.store = store;
-        this.scope = new DyeScopeWrapper(scope);
+        this.scope = new DyeScopeWrapper(this.store.scopeManager.getActiveScope());
     }
 
     public evaluate(statment: string) {
@@ -32,7 +32,7 @@ export class DyeInterpreter {
                 this.defineDefaultVariables(queue);
                 break;
             case '#':
-                this.defineCollection(queue);
+                this.defineScope(queue);
                 break;
             case '$':
                 this.defineStyle(queue);
@@ -68,8 +68,9 @@ export class DyeInterpreter {
         }
     }
 
-    private defineCollection(statment: string[]) {
-        throw new Error("Method not implemented.");
+    private defineScope(statment: string[]) {
+        this.scope.update(this.store.activateCollection(statment[0]));
+        this.store.scopeManager.loadCollections(statment.slice(1))
     }
 
     public process(statments: string[][]): Store {
