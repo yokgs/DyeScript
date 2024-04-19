@@ -1,12 +1,17 @@
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
 import { IStyle } from "../common/style.interface";
+import { Store } from "../store/store";
 import { CSSBuilder } from "./CSSBuilder";
 
 export class MinCSSBuilder extends CSSBuilder {
 
     constructor() {
         super();
+    }
+
+    public build(store: Store): string {
+        return super.build(store).replace(/;}/g, '}');
     }
 
     protected processMotions(motions: Map<string, IAnimation>): void {
