@@ -27,10 +27,10 @@ describe('DyeInterpreter', () => {
         });
     });
     
-    describe('#defineCollection()', () => {
+    describe('#defineScope()', () => {
         it('should redefine active scope', () => {
 
-            interpreter.defineCollection(['newScope', 'default']);
+            interpreter.defineScope(['newScope', 'default']);
             
             assert.equal(store.scopeManager.getActiveScope().name, interpreter.scope.scope.name);
             assert.equal(store.scopeManager.getActiveScope().name, 'newScope');
@@ -39,7 +39,7 @@ describe('DyeInterpreter', () => {
 
             interpreter.defineVariables(['color', 'red']);
             assert.equal(interpreter.scope.get('color'), 'red');
-            interpreter.defineCollection(['default']);
+            interpreter.defineScope(['default']);
 
             assert.equal(store.scopeManager.getActiveScope().name, interpreter.scope.scope.name);
             assert.equal(store.scopeManager.getActiveScope().name, 'default');
