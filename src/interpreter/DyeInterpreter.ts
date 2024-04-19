@@ -1,5 +1,4 @@
 import { TextCaseConverter } from "../common/TextCaseConverter";
-import { DyeScope } from "../data/DyeScope";
 import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
 import { Store } from "../store/store";
 import { VariableNameValidator } from "../validator/VariableNameValidator";
