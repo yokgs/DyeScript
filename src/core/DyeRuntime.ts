@@ -11,6 +11,8 @@ export class DyeRuntime {
     private source: string;
     private static readonly globalScope = new DyeScope();
 
+    static readonly strictMode = false;
+    
     constructor(source: string) {
         this.store = new Store();
         this.source = source;
@@ -25,21 +27,26 @@ export class DyeRuntime {
     static createFromContent(content: string): DyeRuntime {
         return new DyeRuntime(content);
     }
-
+    
     public restartFromSource(): this {
         this.store = new Store();
         this.initilize();
         return this;
     }
-
+    
     private initilize() {
         let table = new Parser().parse(this.source);
         let interpreter = new DyeInterpreter(this.store);
         interpreter.process(table);
     }
-
+    
     public getStore(): Store {
         return this.store;
+    }
+    
+    static alert(message: string) {
+        if(DyeRuntime.strictMode) throw new Error(message);
+        else console.warn("[DyeRuntime] " + message);
     }
 
 }
