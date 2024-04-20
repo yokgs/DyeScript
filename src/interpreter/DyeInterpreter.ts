@@ -6,6 +6,7 @@ import { VariableNameValidator } from "../validator/VariableNameValidator";
 export class DyeInterpreter {
 
     private readonly variable = /&[a-zA-Z][a-zA-Z0-9/]*/;
+    private readonly classQuery = /^\$[a-zA-Z][a-zA-Z0-9\-]*$/;
 
     private store: Store;
     private scope: DyeScopeWrapper;
@@ -23,19 +24,76 @@ export class DyeInterpreter {
 
     public interpret(statment: string[]) {
         let [query, ...queue] = statment.map(s => this.evaluate(s));
+
+        if (this.classQuery.test(query)) {
+            this.applyClass(query, queue);
+            return;
+        }
+
         switch (query) {
             case '@':
+            case 'var':
                 this.defineVariables(queue);
                 break;
             case '!@':
+            case 'default':
                 this.defineDefaultVariables(queue);
                 break;
             case '#':
+            case 'scope':
                 this.defineScope(queue);
                 break;
             case '$':
+            case 'style':
                 this.defineStyle(queue);
                 break;
+            case '.$':
+            case 'class':
+                this.defineClass(queue);
+                break;
+            case '@@':
+            case 'import':
+                this.importModule(queue);
+                break;
+            case '<=':
+            case 'expose':
+                this.exposeToModule(queue);
+                break;
+            case '=>':
+            case 'export':
+                this.exportToInvoker(queue);
+                break;
+        }
+    }
+
+    private applyClass(query: string, targets: string[]) {
+        let className = query.slice(1);
+        for (let target of targets) {
+            if (this.classQuery.test(target))
+                this.scope.extendClass(target.slice(1), className);
+            else
+                this.scope.applyClass(target, className);
+        }
+    }
+
+    exportToInvoker(queue: any[]) {
+        throw new Error("Method not implemented.");
+    }
+
+    exposeToModule(queue: any[]) {
+        throw new Error("Method not implemented.");
+    }
+
+    importModule(queue: any[]) {
+        throw new Error("Method not implemented.");
+    }
+
+    defineClass(statment: string[]) {
+        let selectors = statment[0].split(",");
+        for (let i = 1; i < statment.length; i += 2) {
+            let property = TextCaseConverter.toCamelCase(statment[i]);
+            let value = statment[i + 1];
+            this.store.addStyle(selectors, property, value);
         }
     }
 
