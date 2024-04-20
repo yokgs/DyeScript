@@ -1,9 +1,11 @@
+import { IStyle } from "../common/style.interface";
+
 export class DyeScope {
 
   public name: string;
-  protected classes: any = {}; // styles
+  public classes: Map<string, IStyle> = new Map(); // classes
   public tokens: any = {}; // variables
-  protected links: any = {}; // style's target
+  public links: Map<string, string[]> = new Map(); // style's target
   protected stack: DyeScope[] = [];
   protected finals: string[] = [];
 
