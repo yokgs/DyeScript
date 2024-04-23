@@ -1,5 +1,6 @@
 import { TextCaseConverter } from "../common/TextCaseConverter";
 import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
+import { ParsedSource } from "../parser/Parser";
 import { Store } from "../store/store";
 import { VariableNameValidator } from "../validator/VariableNameValidator";
 
@@ -22,8 +23,21 @@ export class DyeInterpreter {
         return statment;
     }
 
-    public interpret(statment: string[]) {
-        let [query, ...queue] = statment.map(s => this.evaluate(s));
+    public interpret(statment: ParsedSource) {
+        try {
+            this.interpretStatment(statment);
+        } catch (e) {
+            console.error(e, ' at line ', statment.index);
+
+            let errorTrace = {
+                index: statment.index,
+                catchedAt: "Interpreter"
+            }
+        }
+    }
+
+    private interpretStatment(statment: ParsedSource) {
+        let [query, ...queue] = statment.content.map(s => this.evaluate(s));
 
         if (this.classQuery.test(query)) {
             this.applyClass(query, queue);
@@ -74,7 +88,7 @@ export class DyeInterpreter {
         /** 
          * @todo add type validation
          */
-        if(queue.length > 0)
+        if (queue.length > 0)
             type = queue[0];
 
         this.scope.setType(type);
@@ -144,7 +158,7 @@ export class DyeInterpreter {
         this.store.scopeManager.loadCollections(statment.slice(1))
     }
 
-    public process(statments: string[][]): Store {
+    public process(statments: ParsedSource[]): Store {
         for (let statment of statments) {
             this.interpret(statment);
         }
