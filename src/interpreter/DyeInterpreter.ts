@@ -7,7 +7,7 @@ import { VariableNameValidator } from "../validator/VariableNameValidator";
 export class DyeInterpreter {
 
     private readonly variable = /&[a-zA-Z][a-zA-Z0-9/]*/;
-    private readonly classQuery = /^\$[a-zA-Z][a-zA-Z0-9\-]*$/;
+    private readonly classQuery = /^\$[a-zA-Z][a-zA-Z0-9-]*$/;
 
     private store: Store;
     private scope: DyeScopeWrapper;
