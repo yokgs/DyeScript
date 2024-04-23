@@ -63,7 +63,21 @@ export class DyeInterpreter {
             case 'export':
                 this.exportToInvoker(queue);
                 break;
+            case '!type':
+                this.setType(queue);
+                break;
         }
+    }
+    setType(queue: string[]) {
+        let type = "implicit";
+
+        /** 
+         * @todo add type validation
+         */
+        if(queue.length > 0)
+            type = queue[0];
+
+        this.scope.setType(type);
     }
 
     private applyClass(query: string, targets: string[]) {

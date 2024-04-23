@@ -1,6 +1,6 @@
 import { WeightedValue } from "../common/style.interface";
 import { DyeRuntime } from "../core/DyeRuntime";
-import { DyeScope } from "./DyeScope";
+import { DyeScope, VariableType } from "./DyeScope";
 
 export class DyeScopeWrapper {
     
@@ -9,24 +9,24 @@ export class DyeScopeWrapper {
     constructor(scope: DyeScope) {
         this.scope = scope;
     }
-
+    
     public get(variable: string): any {
         return this.scope.get(variable);
     }
-
+    
     public set(name: string, value: string): void {
         return this.scope.set(name, value);
     }
-
+    
     public setDefault(name: string, value: string) {
         if (this.scope.hasLocal(name)) return;
         this.scope.set(name, value);
     }
-
+    
     public update(scope: DyeScope) {
         this.scope = scope;
     }
-
+    
     public applyClass(target: string, className: string) {
         if (this.scope.classes.has(target)) {
             const links = this.scope.links.get(target) || [];
@@ -47,5 +47,8 @@ export class DyeScopeWrapper {
             this.scope.classes.set(className, origin);
         } else DyeRuntime.alert('undefined target');
     }
-
+    
+    public setType(type: string) {
+        this.scope.setType(type as VariableType);
+    }
 }
