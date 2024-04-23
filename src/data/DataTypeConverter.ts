@@ -11,8 +11,8 @@ export class DataTypeConverter {
 
     static implicitConversion(value: string) {
         if (value === 'true' || value === 'false') return value === 'true';
-        if (/^[\d\-]+$/.test(value)) return parseInt(value);
-        if (/^[\d\.\-]+$/.test(value)) return parseFloat(value);
+        if (/^[\d-]+$/.test(value)) return parseInt(value);
+        if (/^[\d.-]+$/.test(value)) return parseFloat(value);
         if (value === 'undefined') return undefined;
         if (value === 'null') return null;
         return value;

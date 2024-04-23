@@ -6,7 +6,6 @@ export class PropertyValidator extends Validator {
             return propertyName.length > 2 && !propertyName.endsWith('-') && propertyName.length < 64 && /^(--|-)?[a-z]{1,20}[a-z-]{,40}(?!-)$/.test(propertyName);
         }
     };
-    protected static strict = false;
 
     public isValid(propertyName: string): boolean {
         if (PropertyValidator.test.test(propertyName)) return true;

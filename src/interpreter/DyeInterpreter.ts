@@ -27,12 +27,11 @@ export class DyeInterpreter {
         try {
             this.interpretStatment(statment);
         } catch (e) {
-            console.error(e, ' at line ', statment.index);
-
             let errorTrace = {
                 index: statment.index,
                 catchedAt: "Interpreter"
             }
+            console.error(e, ' at line ', statment.index, errorTrace);
         }
     }
 
