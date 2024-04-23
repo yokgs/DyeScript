@@ -6,7 +6,7 @@ import { ScopeManager } from "./ScopeManager";
 import { StyleManager } from "./StyleManager";
 
 export class Store {
-    public styles: Map<string, IStyle> = new Map<string, IStyle>;
+    public styles: Map<string, IStyle> = new Map();
     public fonts: Map<string, IFont> = new Map<string, IFont>();
     public animations: Map<string, IAnimation> = new Map<string, IAnimation>();
     public motions: Map<string, IAnimation> = new Map<string, IAnimation>();
