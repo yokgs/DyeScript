@@ -1,3 +1,4 @@
+import { TextCaseConverter } from "../common/TextCaseConverter";
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
 import { IStyle } from "../common/style.interface";
@@ -7,10 +8,7 @@ import { FileBuilder } from "./FileBuilder";
 
 export class CSSBuilder extends FileBuilder {
 
-    protected header: string = `/**
-    * Built with DyeScript version ${DyeRuntime.version}
-    * by Yazid Slila (@yokgs)
-    */`;
+    protected header: string = `/**\n  * Built with DyeScript version ${DyeRuntime.version}\n  * by Yazid Slila (@yokgs)\n  */\n`;
 
     constructor() {
         super();
@@ -44,7 +42,7 @@ export class CSSBuilder extends FileBuilder {
             for (let s in motion) {
                 motionBuffer += `\t\t${s} {\n`;
                 for (let p in motion[s]) {
-                    motionBuffer += `\t\t\t${p}: ${motion[s][p]};\n`;
+                    motionBuffer += `\t\t\t${TextCaseConverter.toKebabCase(p)}: ${motion[s][p]};\n`;
                 }
                 motionBuffer += `\t\t}\n`;
             }
@@ -66,7 +64,7 @@ export class CSSBuilder extends FileBuilder {
                 let animation = animations.get(animationKey);
                 if (typeof animation != "undefined") {
                     for (let property in animation[keyframe]) {
-                        this.append(`\t\t${property}: ${animation[keyframe][property]};\n`);
+                        this.append(`\t\t${TextCaseConverter.toKebabCase(property)}: ${animation[keyframe][property]};\n`);
                     }
                 }
                 this.append(`\t}\n`);
@@ -80,7 +78,7 @@ export class CSSBuilder extends FileBuilder {
             this.append(`\n\n${el} {\n`);
             let style = styles.get(el);
             for (let p in style) {
-                this.append(`\t${p}: ${this.getDominantStyle(style[p])};\n`);
+                this.append(`\t${TextCaseConverter.toKebabCase(p)}: ${this.getDominantStyle(style[p])};\n`);
             }
             this.append(`}`);
         }

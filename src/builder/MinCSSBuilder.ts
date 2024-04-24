@@ -1,3 +1,4 @@
+import { TextCaseConverter } from "../common/TextCaseConverter";
 import { IAnimation } from "../common/animation.interface";
 import { IFont } from "../common/font.interface";
 import { IStyle } from "../common/style.interface";
@@ -24,7 +25,7 @@ export class MinCSSBuilder extends CSSBuilder {
             for (let s in motion) {
                 motionBuffer += `${s}{`;
                 for (let p in motion[s]) {
-                    motionBuffer += `${p}:${motion[s][p]};`;
+                    motionBuffer += `${TextCaseConverter.toKebabCase(p)}:${motion[s][p]};`;
                 }
                 motionBuffer = motionBuffer.substring(0, motionBuffer.length - 1);
                 motionBuffer += `}`;
@@ -47,7 +48,7 @@ export class MinCSSBuilder extends CSSBuilder {
                 let animation = animations.get(animationKey);
                 if (typeof animation != "undefined") {
                     for (let property in animation[keyframe]) {
-                        this.append(`${property}:${animation[keyframe][property]};`);
+                        this.append(`${TextCaseConverter.toKebabCase(property)}:${animation[keyframe][property]};`);
                     }
                 }
                 this.append(`}`);
@@ -61,7 +62,7 @@ export class MinCSSBuilder extends CSSBuilder {
             this.append(`${el}{`);
             let style = styles.get(el);
             for (let p in style) {
-                this.append(`${p}:${this.getDominantStyle(style[p])};`);
+                this.append(`${TextCaseConverter.toKebabCase(p)}:${this.getDominantStyle(style[p])};`);
             }
             this.append(`}`);
         }
