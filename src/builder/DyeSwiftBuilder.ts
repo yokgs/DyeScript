@@ -30,16 +30,13 @@ export class DyeSwiftBuilder extends FileBuilder {
 
     processStyles(styles: Map<string, IStyle>) {
         for (let el of styles.keys()) {
-            console.log("inside styles  ", el);
             this.append(`$ ${el}`);
             let style = styles.get(el);
             for (let p in style) {
                 this.append(` ${p} ${this.getDominantStyle(style[p])}`);
-                console.log(this.getOutput());
             }
             this.append(`\n`);
         }
-        console.log(this.getOutput());
     }
 
     processFonts(fonts: Map<string, IFont>) {
