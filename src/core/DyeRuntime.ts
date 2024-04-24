@@ -3,6 +3,8 @@ import { FileLoader } from "../fetch/FileLoader";
 import { Parser } from "../parser/Parser";
 import { DyeInterpreter } from "../interpreter/DyeInterpreter";
 import { DyeScope } from "../data/DyeScope";
+import { FileBuilderFactory } from "../builder/FileBuilderFactory";
+import { DyeBuilderTarget } from "../common/Target";
 
 export class DyeRuntime {
     static readonly version = 'pre-1.0.0';
@@ -43,6 +45,13 @@ export class DyeRuntime {
 
     public getStore(): Store {
         return this.store;
+    }
+
+    public build(targets: DyeBuilderTarget[]) {
+        let factory = new FileBuilderFactory(this.store);
+        return targets.map(target => {
+            return { data: factory.build(target), target };
+        });
     }
 
     static alert(message: string) {
