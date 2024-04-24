@@ -118,9 +118,12 @@ export class DyeInterpreter {
     defineClass(statment: string[]) {
         let selectors = statment[0].split(",");
         for (let i = 1; i < statment.length; i += 2) {
-            let property = TextCaseConverter.toCamelCase(statment[i]);
-            let value = statment[i + 1];
-            this.store.addStyle(selectors, property, value);
+            let properties = statment[i].split(",");
+            for (let property of properties) {
+                property = TextCaseConverter.toCamelCase(property);
+                let value = statment[i + 1];
+                this.store.addStyle(selectors, property, value);
+            }
         }
     }
 
@@ -135,9 +138,12 @@ export class DyeInterpreter {
     private defineStyle(statment: string[]) {
         let selectors = statment[0].split(",");
         for (let i = 1; i < statment.length; i += 2) {
-            let property = TextCaseConverter.toCamelCase(statment[i]);
-            let value = statment[i + 1];
-            this.store.addStyle(selectors, property, value);
+            let properties = statment[i].split(",");
+            for (let property of properties) {
+                property = TextCaseConverter.toCamelCase(property);
+                let value = statment[i + 1];
+                this.store.addStyle(selectors, property, value);
+            }
         }
     }
 
