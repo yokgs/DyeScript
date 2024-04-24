@@ -3,7 +3,7 @@ import { Validator } from "./Validator";
 export class PropertyValidator extends Validator {
     protected static test = {
         test(propertyName: string) {
-            return propertyName.length > 2 && !propertyName.endsWith('-') && propertyName.length < 64 && /^(--|-)?[a-z]{1,20}[a-z-]{,40}(?!-)$/.test(propertyName);
+            return propertyName.length > 2 && !propertyName.endsWith('-') && propertyName.length < 64 && /^-{0,2}[a-z]{1,20}[a-z-]{0,40}(?!-)$/.test(propertyName);
         }
     };
 
