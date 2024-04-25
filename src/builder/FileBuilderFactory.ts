@@ -1,7 +1,7 @@
 import { DyeBuilderTarget } from "../common/Target";
 import { Store } from "../store/store";
 import { CSSBuilder } from "./CSSBuilder";
-import { DyeSwiftBuilder } from "./DyeSwiftBuilder";
+import { DyeGestBuilder } from "./DyeGestBuilder";
 import { FileBuilder } from "./FileBuilder";
 import { MinCSSBuilder } from "./MinCSSBuilder";
 
@@ -13,8 +13,8 @@ export class FileBuilderFactory {
     }
     static create(target: DyeBuilderTarget): FileBuilder {
         switch (target) {
-            case "dyeswift":
-                return new DyeSwiftBuilder();
+            case "dyegest":
+                return new DyeGestBuilder();
             case "mincss":
                 return new MinCSSBuilder();
             default:

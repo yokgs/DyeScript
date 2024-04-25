@@ -4,9 +4,9 @@ import { DyeRuntime } from "../core/DyeRuntime";
 import { Store } from "../store/store";
 import { FileBuilder } from "./FileBuilder";
 
-export class DyeSwiftBuilder extends FileBuilder {
+export class DyeGestBuilder extends FileBuilder {
 
-    protected header: string = `!dyeswift;!version ${DyeRuntime.version}\n`;
+    protected header: string = `!dyegest;!version ${DyeRuntime.version}\n`;
 
     constructor() {
         super();

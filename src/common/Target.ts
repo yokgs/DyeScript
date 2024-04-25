@@ -10,7 +10,7 @@ const DyeTarget = {
 
 const DyeBuilderTarget = {
     mincss: 'mincss',
-    dyeswift: 'dyeswift',
+    dyegest: 'dyegest',
     default: 'default'
 
 } as const;

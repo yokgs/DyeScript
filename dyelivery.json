@@ -3,6 +3,6 @@
    "experimental": true,
    "log": "./dyes/logs",
    "outputDir": "./dyes-gen",
-   "targets": ["CSS", "MinCSS", "DyeSwift"],
+   "targets": ["CSS", "MinCSS", "DyeGest"],
    "strict": true
 }

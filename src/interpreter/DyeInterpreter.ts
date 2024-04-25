@@ -79,9 +79,9 @@ export class DyeInterpreter {
             case '!type':
                 this.setType(queue);
                 break;
-            case '!dyeswift':
+            case '!dyegest':
                 /** 
-                * @todo execute in dyeswift mode
+                * @todo execute in dyegest mode
                 */
                 break;
             case '!version':

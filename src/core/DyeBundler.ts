@@ -11,7 +11,7 @@ export class DyeBundler {
     static toExt(target: DyeBuilderTarget){
         return {
             "mincss": "min.css" as const,
-            "dyeswift": "s.dye" as const, 
+            "dyegest": "s.dye" as const, 
             "default": "css" as const
         }[target];
     }
