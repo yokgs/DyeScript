@@ -79,6 +79,16 @@ export class DyeInterpreter {
             case '!type':
                 this.setType(queue);
                 break;
+            case '!dyeswift':
+                /** 
+                * @todo execute in dyeswift mode
+                */
+                break;
+            case '!version':
+                /** 
+                * @todo throw compatibility error or warning
+                */
+                break;
         }
     }
     setType(queue: string[]) {
