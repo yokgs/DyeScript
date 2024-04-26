@@ -86,21 +86,21 @@ export class DyeInterpreter {
                 /** 
                 * @todo execute in dyegest mode
                 */
-               this.runtime.enableStrictMode();
-               this.runtime.enableDyeGestMode();
+                this.runtime.enableStrictMode();
+                this.runtime.enableDyeGestMode();
                 break;
             case '!version':
                 /** 
                 * @todo throw compatibility error or warning
                 */
-               this.checkSupport(queue[0]);
+                this.checkSupport(queue[0]);
                 break;
         }
     }
 
     private checkSupport(version: string) {
         let thisVersion = DyeRuntime.version;
-        if(version !== thisVersion) console.log("This file was degisted by diffrent version of DyeScript. It may not work as it suppose. try digest the source file using DyeScript version "+thisVersion)
+        if (version !== thisVersion) console.log("This file was degisted by diffrent version of DyeScript. It may not work as it suppose. try digest the source file using DyeScript version " + thisVersion)
     }
 
     setType(queue: string[]) {
@@ -142,9 +142,9 @@ export class DyeInterpreter {
         for (let i = 1; i < statment.length; i += 2) {
             let properties = statment[i].split(",");
             for (let property of properties) {
-                property = TextCaseConverter.toCamelCase(property);
+                const camelCaseProperty = TextCaseConverter.toCamelCase(property);
                 let value = statment[i + 1];
-                this.store.addStyle(selectors, property, value);
+                this.store.addStyle(selectors, camelCaseProperty, value);
             }
         }
     }
@@ -162,9 +162,9 @@ export class DyeInterpreter {
         for (let i = 1; i < statment.length; i += 2) {
             let properties = statment[i].split(",");
             for (let property of properties) {
-                property = TextCaseConverter.toCamelCase(property);
+                const camelCaseProperty = TextCaseConverter.toCamelCase(property);
                 let value = statment[i + 1];
-                this.store.addStyle(selectors, property, value);
+                this.store.addStyle(selectors, camelCaseProperty, value);
             }
         }
     }
