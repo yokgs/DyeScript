@@ -37,6 +37,15 @@ export class Store {
         }
     }
 
+    addClassDefinition(classes: string[], property: string, value: string) {
+        let weightedValue = [value, this.counter] as WeightedValue;
+        let manager = new StyleManager(this.scopeManager.getActiveScope().classes);
+        for (let className of classes) {
+            manager.addStyle(className, property, weightedValue);
+        }
+        this.tick();
+    }
+
     private mergeStyles(to: IStyle, from: IStyle): void {
         for (let key in from) {
             let fromProperty = from[key];
