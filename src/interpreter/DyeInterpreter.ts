@@ -83,19 +83,17 @@ export class DyeInterpreter {
                 this.setType(queue);
                 break;
             case '!dyegest':
-                /** 
-                * @todo execute in dyegest mode
-                */
-                this.runtime.enableStrictMode();
-                this.runtime.enableDyeGestMode();
+                this.enableDyeGestMode();
                 break;
             case '!version':
-                /** 
-                * @todo throw compatibility error or warning
-                */
                 this.checkSupport(queue[0]);
                 break;
         }
+    }
+
+    private enableDyeGestMode() {
+        this.runtime.enableStrictMode();
+        this.runtime.enableDyeGestMode();
     }
 
     private checkSupport(version: string) {
