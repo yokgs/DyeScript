@@ -25,7 +25,12 @@ export class FileLoader {
             return this.readFile(path.join(fixedPath, 'index.dye'));
         if (fs.existsSync(path.join(fixedPath, 'index.dyex')))
             return this.readFile(path.join(fixedPath, 'index.dyex'));
-        return "";
+
+        return {
+            content: "",
+            path: "",
+            ext: ""
+        };
     }
 
     private fixExtension(pathLike: string) {
@@ -41,6 +46,10 @@ export class FileLoader {
     }
 
     private readFile(pathLike: string) {
-        return fs.readFileSync(pathLike, 'utf-8').toString();
+        return {
+            content: fs.readFileSync(pathLike, 'utf-8').toString(),
+            path: pathLike,
+            ext: path.extname(pathLike)
+        };
     }
 }
