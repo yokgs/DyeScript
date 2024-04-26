@@ -33,17 +33,22 @@ export class DyeGestBuilder extends FileBuilder {
             this.append(`$ ${el}`);
             let style = styles.get(el);
             for (let p in style) {
-                this.append(` ${p} ${this.getDominantStyle(style[p])}`);
+                const dominantStyle = this.getDominantStyle(style[p]);
+                this.append(` ${p} ${this.safeString(dominantStyle)}`);
             }
             this.append(`\n`);
         }
+    }
+
+    private safeString(str: string) {
+        return str.includes(" ") ? `"${str}"` : str;
     }
 
     processFonts(fonts: Map<string, IFont>) {
         for (let el in fonts) {
             let font = fonts.get(el);
             if (font)
-                this.append(`\n@font ${el} ${font.source}`);
+                this.append(`\n@font ${this.safeString(el)} ${this.safeString(font.source)}`);
         }
     }
     
