@@ -1,4 +1,5 @@
 import { TextCaseConverter } from "../common/TextCaseConverter";
+import { DyeRuntime } from "../core/DyeRuntime";
 import { DyeScopeWrapper } from "../data/DyeScopeWrapper";
 import { ParsedSource } from "../parser/Parser";
 import { Store } from "../store/store";
@@ -11,10 +12,12 @@ export class DyeInterpreter {
 
     private store: Store;
     private scope: DyeScopeWrapper;
+    private runtime: DyeRuntime;
 
-    constructor(store: Store) {
+    constructor(store: Store, runtime: DyeRuntime) {
         this.store = store;
         this.scope = new DyeScopeWrapper(this.store.scopeManager.getActiveScope());
+        this.runtime = runtime;
     }
 
     public evaluate(statment: string) {
@@ -83,14 +86,23 @@ export class DyeInterpreter {
                 /** 
                 * @todo execute in dyegest mode
                 */
+               this.runtime.enableStrictMode();
+               this.runtime.enableDyeGestMode();
                 break;
             case '!version':
                 /** 
                 * @todo throw compatibility error or warning
                 */
+               this.checkSupport(queue[0]);
                 break;
         }
     }
+
+    private checkSupport(version: string) {
+        let thisVersion = DyeRuntime.version;
+        if(version !== thisVersion) console.log("This file was degisted by diffrent version of DyeScript. It may not work as it suppose. try digest the source file using DyeScript version "+thisVersion)
+    }
+
     setType(queue: string[]) {
         let type = "implicit";
 
