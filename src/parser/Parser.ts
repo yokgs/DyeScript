@@ -78,7 +78,31 @@ export class Parser {
             index: x.index
         })) as ParsedSource[];
 
+        table = this.joinQuotes(table);
+
         return this.replaceAnchors(table);
+    }
+
+    private joinQuotes(table: ParsedSource[]): ParsedSource[] {
+        return table.map(x => {
+            let content = x.content;
+            let hasStartQuote = content.filter(e => e.startsWith('"'));
+            let hasEndQuote = content.filter(e => e.endsWith('"'));
+            if (hasStartQuote.length > 0 || hasEndQuote.length > 0) {
+                if (hasStartQuote.length == 0 || hasEndQuote.length == 0) throw new Error("Quotes are not balanced");
+
+                let startIndex = content.indexOf(hasStartQuote[0]);
+                let endIndex = content.indexOf(hasEndQuote[0]) + 1;
+                if (startIndex < endIndex){
+                    let mergedChunck = content.slice(startIndex, endIndex).join(" ");
+                    content.splice(startIndex, endIndex - startIndex, mergedChunck.slice(1, mergedChunck.length - 1));
+                }
+                hasStartQuote = content.filter(e => e.startsWith('"'));
+                hasEndQuote = content.filter(e => e.endsWith('"'));
+            }
+
+            return { content, index: x.index };
+        })
     }
 
 }
