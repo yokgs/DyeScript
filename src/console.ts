@@ -24,7 +24,11 @@ export class DyeConsole {
 
     public exportLogs() {
         let builtLog = this.logStore.map(this.buildLog);
-        this.clear();
+        return builtLog.join('\n');
+    }
+
+    public exportErrors() {
+        let builtLog = this.logStore.filter(log => log.type === 'ERROR' || log.type === 'FATAL').map(this.buildLog);
         return builtLog.join('\n');
     }
 

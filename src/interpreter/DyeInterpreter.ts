@@ -29,12 +29,8 @@ export class DyeInterpreter {
     public interpret(statment: ParsedSource) {
         try {
             this.interpretStatment(statment);
-        } catch (e) {
-            let errorTrace = {
-                index: statment.index,
-                catchedAt: "Interpreter"
-            }
-            console.error(e, ' at line ', statment.index, errorTrace);
+        } catch (e: any) {
+            this.runtime.logger.error(e.message, "DyeInterpreter", "current file", statment.index);
         }
     }
 

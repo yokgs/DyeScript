@@ -5,10 +5,12 @@ import { DyeInterpreter } from "../interpreter/DyeInterpreter";
 import { DyeScope } from "../data/DyeScope";
 import { FileBuilderFactory } from "../builder/FileBuilderFactory";
 import { DyeBuilderTarget } from "../common/Target";
+import { DyeConsole } from "../console";
 
 export class DyeRuntime {
     static readonly version = 'pre-1.0.0';
     private store: Store;
+    private _logs: DyeConsole;
     private createdBy: string = 'api';
     private source: string;
     private static readonly globalScope = new DyeScope();
@@ -18,6 +20,7 @@ export class DyeRuntime {
     
     constructor(source: string) {
         this.store = new Store();
+        this._logs = new DyeConsole();
         this.source = source;
         this.initilize();
     }
@@ -84,6 +87,10 @@ export class DyeRuntime {
 
     public get isDigested() {
         return this._isDigested;
+    }
+
+    public get logger() {
+        return this._logs;
     }
 
 }
